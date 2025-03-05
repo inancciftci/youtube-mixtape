@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Josefin_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/navbar";
+import Theme from "@/context/Theme";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const josefinSans = Josefin_Sans({
+  variable: "--font-josefin-sans",
   subsets: ["latin"],
 });
 
@@ -23,11 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html suppressHydrationWarning lang="en">
+      <body className={`${josefinSans.className} antialiased`}>
+        <Theme attribute="class" defaultTheme="system" enableSystem>
+          <Navbar />
+          {children}
+        </Theme>
       </body>
     </html>
   );
